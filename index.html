@@ -1233,7 +1233,7 @@
     <!-- ПЛАВАЮЩИЕ КНОПКИ СВЯЗИ -->
     <div class="floating-contacts">
       <a
-        href="https://t.me/ТВОЙ_НИК"
+        href="https://t.me/klukvaart"
         target="_blank"
         class="float-btn float-tg"
         aria-label="Написать в Telegram"
@@ -1245,7 +1245,7 @@
         </svg>
       </a>
       <a
-        href="https://wa.me/79990000000"
+        href="https://wa.me/79258554533"
         target="_blank"
         class="float-btn float-wa"
         aria-label="Написать в WhatsApp"
@@ -1319,11 +1319,29 @@
 
       <nav id="nav-menu">
         <a onclick="navigateToCategory('cards')">Карточки товара</a>
-        <a onclick="navigateToCategory('ai')">ИИ gen + ретушь</a>
-        <a onclick="navigateToCategory('model')">Модельная съемка</a>
-        <a onclick="navigateToCategory('object')">Предметная съемка</a>
-        <a onclick="navigateToCategory('stage')">Stage design</a>
-        <a onclick="navigateToCategory('design')">Дизайн и иллюстрация</a>
+        <a onclick="navigateToCategory('ai')">ИИ генерация</a>
+        <a onclick="navigateToCategory('model')">Фотосъемка</a>
+        <a onclick="navigateToCategory('object')">Видео</a>
+        <!-- Пустые категории удалены -->
+        <a href="#about" onclick="closeMobileMenu()">Обо мне</a>
+
+        <!-- НОВАЯ КНОПКА TELEGRAM ДЛЯ МОБИЛЬНОГО МЕНЮ -->
+        <a
+          href="https://t.me/klukvaart"
+          target="_blank"
+          class="btn btn-primary"
+          style="
+            margin-top: 20px;
+            background: #2aabee !important;
+            color: #fff !important;
+            width: 80%;
+            max-width: 250px;
+            text-align: center;
+            font-size: 14px;
+            padding: 15px;
+          "
+          >Мой Telegram</a
+        >
       </nav>
     </header>
 
@@ -2067,39 +2085,50 @@
           Мои <span>Услуги</span>
         </h2>
         <div class="services-grid">
-          <div
+          <!-- Карточка 1 (Кликабельная, ведет на вкладку AI) -->
+          <a
+            onclick="navigateToCategory('ai')"
             class="service-card glass-card"
             data-aos="fade-up"
             data-aos-delay="100"
+            style="cursor: pointer; text-decoration: none"
           >
             <h3>Инфографика и Ретушь</h3>
             <p>
               AI-дизайн, любая постобработка, создание продающей инфографики в
               Adobe Photoshop и Illustrator.
             </p>
-          </div>
-          <div
+          </a>
+
+          <!-- Карточка 2 (Кликабельная, ведет на вкладку Фотосъемка) -->
+          <a
+            onclick="navigateToCategory('model')"
             class="service-card glass-card"
             data-aos="fade-up"
             data-aos-delay="200"
+            style="cursor: pointer; text-decoration: none"
           >
             <h3>Фотосъемка</h3>
             <p>
               Профессиональная модельная и предметная фотосъемка, подчеркивающая
               все преимущества вашего товара.
             </p>
-          </div>
-          <div
+          </a>
+
+          <!-- Карточка 3 (Кликабельная, ведет на вкладку Видео) -->
+          <a
+            onclick="navigateToCategory('object')"
             class="service-card glass-card"
             data-aos="fade-up"
             data-aos-delay="300"
+            style="cursor: pointer; text-decoration: none"
           >
             <h3>Видео и Публикация</h3>
             <p>
               Монтаж видео в Premiere Pro, создание видео из фото, а также
               помощь с публикацией готового контента на Wildberries.
             </p>
-          </div>
+          </a>
         </div>
       </div>
     </section>
@@ -2194,7 +2223,8 @@
 
     <!-- ПОДВАЛ -->
     <footer id="footer">
-      <div class="footer-grid">
+      <!-- ИСПРАВЛЕНИЕ: Сетка теперь на 3 колонки (2fr 1fr 1fr) -->
+      <div class="footer-grid" style="grid-template-columns: 2fr 1fr 1fr">
         <div class="footer-col footer-col-about">
           <a
             href="#"
@@ -2227,18 +2257,6 @@
                   class="cranberry-berry"
                   style="animation-delay: 0.6s"
                 />
-                <polygon
-                  points="45,40 47,43 50,45 47,47 45,50 43,47 40,45 43,43"
-                  class="cranberry-star"
-                />
-                <polygon
-                  points="25,61 26.5,63 29,65 26.5,67 25,69 23.5,67 21,65 23.5,63"
-                  class="cranberry-star"
-                />
-                <polygon
-                  points="55,66 56.5,68 59,70 56.5,72 55,74 53.5,72 51,70 53.5,68"
-                  class="cranberry-star"
-                />
               </g>
             </svg>
             <div class="logo-text">KLUKVA<span>ART</span></div>
@@ -2258,9 +2276,7 @@
             <li>
               <a onclick="navigateToCategory('model')">Модельная съемка</a>
             </li>
-            <li>
-              <a onclick="navigateToCategory('object')">Предметная съемка</a>
-            </li>
+            <li><a onclick="navigateToCategory('object')">Видео</a></li>
             <li><a onclick="navigateToCategory('ai')">ИИ-генерация</a></li>
           </ul>
         </div>
@@ -2268,31 +2284,14 @@
         <div class="footer-col">
           <h4>Контакты</h4>
           <ul class="footer-links footer-links-contacts">
-            <li><a href="mailto:tatyana@yandex.ru">tatyana@yandex.ru</a></li>
-            <li><a href="tel:+79990000000">+7 (999) 000-00-00</a></li>
+            <!-- ВСТАВЬ РЕАЛЬНЫЕ КОНТАКТЫ КЛЮКВЫ СЮДА -->
+            <li><a href="mailto:tk888@yandex.ru">tk888@yandex.ru</a></li>
+            <li><a href="tel:+79258554533">+7 (925) 855-45-33</a></li>
             <li>г. Москва / Удаленно</li>
           </ul>
         </div>
 
-        <div class="footer-col">
-          <h4>Мои соцсети</h4>
-          <div class="social-icons">
-            <a href="https://wa.me/79990000000" target="_blank">
-              <svg viewBox="0 0 24 24">
-                <path
-                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.452-.885-.77-1.482-1.72-1.655-2.018-.173-.298-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51h-.57c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
-                />
-              </svg>
-            </a>
-            <a href="https://t.me/ТВОЙ_НИК" target="_blank">
-              <svg viewBox="0 0 24 24">
-                <path
-                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.19-.08-.05-.19-.02-.27 0-.12.03-1.98 1.25-5.58 3.69-.53.36-1.01.53-1.44.52-.47-.01-1.38-.26-2.06-.48-.83-.27-1.49-.42-1.43-.89.03-.25.38-.5.1-.76 1.63-.71 5.43-2.35 11.39-4.81 5.42-2.25 6.55-2.64 7.29-2.65.16 0 .52.04.71.21.16.15.19.35.2.53 0 .09-.01.21-.02.26z"
-                />
-              </svg>
-            </a>
-          </div>
-        </div>
+        <!-- Блок "Мои соцсети" полностью удален -->
       </div>
 
       <div class="footer-bottom">
