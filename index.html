@@ -936,14 +936,19 @@
         );
         box-shadow: 0 0 15px var(--accent-main);
       }
+
       .footer-grid {
         display: grid;
-        grid-template-columns: 2fr 1fr 1fr 1fr;
-        gap: 40px;
-        max-width: 1400px;
+        /* ИСПРАВЛЕНО: Сбалансированные пропорции колонок */
+        grid-template-columns: 1.2fr 1fr 1fr;
+        /* ИСПРАВЛЕНО: Увеличили зазор между ними для воздуха */
+        gap: 60px;
+        /* ИСПРАВЛЕНО: Сжали общую ширину, чтобы колонки не разлетались по краям экрана */
+        max-width: 1100px;
         margin: 0 auto;
         margin-bottom: 50px;
       }
+      /* Гарантируем левое выравнивание на ПК */
       .footer-col-about {
         display: flex;
         flex-direction: column;
@@ -1224,6 +1229,31 @@
         .float-btn svg {
           width: 24px;
           height: 24px;
+        }
+        /* --- СПАСАЕМ ПОДВАЛ НА МОБИЛКЕ --- */
+        .footer-grid {
+          grid-template-columns: 1fr; /* Выстраиваем в 1 колонку */
+          text-align: center;
+          gap: 40px;
+        }
+        .footer-col-about {
+          align-items: center; /* Центрируем логотип */
+          text-align: center; /* Центрируем текст */
+        }
+        .footer-col-about .logo-wrapper {
+          justify-content: center; /* Логотип строго по центру */
+        }
+        .footer-col p {
+          margin: 20px auto;
+        }
+        .footer-bottom {
+          justify-content: center;
+          text-align: center;
+          flex-direction: column; /* Копирайт и логотип друг под другом */
+          gap: 20px;
+        }
+        .footer-mini-logo {
+          transform-origin: center center;
         }
       }
 
@@ -2251,14 +2281,9 @@
 
     <!-- ПОДВАЛ -->
     <footer id="footer">
-      <!-- ИСПРАВЛЕНИЕ: Сетка теперь на 3 колонки (2fr 1fr 1fr) -->
-      <div class="footer-grid" style="grid-template-columns: 2fr 1fr 1fr">
+      <div class="footer-grid">
         <div class="footer-col footer-col-about">
-          <a
-            href="#"
-            class="logo-wrapper"
-            style="margin-bottom: 20px; justify-content: center"
-          >
+          <a href="#" class="logo-wrapper" style="margin-bottom: 20px">
             <svg
               class="cranberry-icon"
               viewBox="0 0 100 100"
@@ -2312,14 +2337,11 @@
         <div class="footer-col">
           <h4>Контакты</h4>
           <ul class="footer-links footer-links-contacts">
-            <!-- ВСТАВЬ РЕАЛЬНЫЕ КОНТАКТЫ КЛЮКВЫ СЮДА -->
             <li><a href="mailto:tk888@yandex.ru">tk888@yandex.ru</a></li>
             <li><a href="tel:+79258554533">+7 (925) 855-45-33</a></li>
             <li>г. Москва / Удаленно</li>
           </ul>
         </div>
-
-        <!-- Блок "Мои соцсети" полностью удален -->
       </div>
 
       <div class="footer-bottom">
