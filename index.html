@@ -283,6 +283,11 @@
         color: var(--accent-main);
       }
 
+      /* Скрываем мобильные кнопки связи на компьютерах */
+      .mobile-nav-btn {
+        display: none !important;
+      }
+
       .menu-toggle {
         display: none;
         cursor: pointer;
@@ -1095,6 +1100,10 @@
           font-weight: 600;
           white-space: normal;
         }
+        /* Показываем кнопки обратно только на мобильных */
+        .mobile-nav-btn {
+          display: inline-block !important;
+        }
       }
 
       @media (max-width: 900px) {
@@ -1325,11 +1334,11 @@
         <!-- Пустые категории удалены -->
         <a href="#about" onclick="closeMobileMenu()">Обо мне</a>
 
-        <!-- НОВАЯ КНОПКА TELEGRAM ДЛЯ МОБИЛЬНОГО МЕНЮ -->
+        <!-- КНОПКА TELEGRAM ДЛЯ МОБИЛЬНОГО МЕНЮ -->
         <a
           href="https://t.me/klukvaart"
           target="_blank"
-          class="btn btn-primary"
+          class="btn btn-primary mobile-nav-btn"
           style="
             margin-top: 20px;
             background: #2aabee !important;
@@ -1341,6 +1350,25 @@
             padding: 15px;
           "
           >Мой Telegram</a
+        >
+
+        <!-- КНОПКА WHATSAPP (Цвет #25D366) -->
+        <!-- Замени 79990000000 на реальный номер Клюквы (начиная с 7, без плюса) -->
+        <a
+          href="https://wa.me/79258554533"
+          target="_blank"
+          class="btn btn-primary mobile-nav-btn"
+          style="
+            margin-top: 12px;
+            background: #25d366 !important;
+            color: #fff !important;
+            width: 80%;
+            max-width: 250px;
+            text-align: center;
+            font-size: 14px;
+            padding: 15px;
+          "
+          >Мой WhatsApp</a
         >
       </nav>
     </header>
