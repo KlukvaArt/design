@@ -10,17 +10,14 @@
       name="description"
       content="Выполняю комплекс работ по созданию контента для карточек товаров. AI-дизайнер, ретушь, инфографика, фотосъемка и видеомонтаж."
     />
-    <meta
-      property="og:title"
-      content="KlukvaArt | Контент для маркетплейсов"
-    />
+    <meta property="og:title" content="KlukvaArt | Контент для маркетплейсов" />
     <meta
       property="og:description"
       content="AI-дизайн, инфографика, предметная и модельная съемка, видеомонтаж."
     />
     <meta
       property="og:image"
-      content="https://webartai.github.io/KlukvaDesign/img/og-image.jpg"
+      content="https://ТВОЙ-ЛОГИН.github.io/ТВОЙ-РЕПОЗИТОРИЙ/img/og-image.jpg"
     />
     <meta property="og:type" content="website" />
 
@@ -334,7 +331,7 @@
         margin: 0 auto;
       }
       .hero-text h1 {
-        font-size: 3.5rem;
+        font-size: 2.8rem;
         font-weight: 800;
         line-height: 1.2;
         margin-bottom: 20px;
@@ -355,23 +352,25 @@
         line-height: 1.8;
       }
 
-      .hero-buttons {
-        display: flex;
-        gap: 20px;
-      }
-
       .hero-img {
         position: relative;
+        display: flex;
+        justify-content: center;
       }
-      .hero-img img {
+
+      /* ИСПРАВЛЕНИЕ: Квадратная форма с закруглениями для ПК, размер 350px */
+      .hero-avatar {
         width: 100%;
-        max-width: 500px;
+        max-width: 350px;
         border-radius: 20px;
         display: block;
-        margin: 0 auto;
         box-shadow: 0 20px 50px var(--shadow-color);
         object-fit: cover;
+        border: none;
+        padding: 0;
+        background: transparent;
       }
+      /* Возвращаем стильную рамку сзади для ПК */
       .hero-img::before {
         content: "";
         position: absolute;
@@ -382,7 +381,7 @@
         top: 20px;
         right: -20px;
         z-index: -1;
-        max-width: 500px;
+        max-width: 350px;
         margin: 0 auto;
         left: 0;
         right: 0;
@@ -408,10 +407,16 @@
       }
       .section-title {
         font-size: 2.5rem;
-        margin-bottom: 50px;
+        margin-bottom: 10px;
         text-transform: uppercase;
         font-weight: 800;
         text-align: center;
+      }
+      .section-subtitle {
+        text-align: center;
+        color: var(--text-muted);
+        font-size: 1.1rem;
+        margin-bottom: 50px;
       }
       .section-title span {
         color: var(--accent-main);
@@ -519,13 +524,28 @@
         font-weight: 800;
       }
 
-      /* ================= ДО / ПОСЛЕ ================= */
-      .ba-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 40px;
-        width: 100%;
+      /* ================= НОВАЯ ИНТЕРАКТИВНАЯ ГАЛЕРЕЯ ДО/ПОСЛЕ ================= */
+      .ba-gallery-wrapper {
+        max-width: 900px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
+
+      /* Главный контейнер (Слайдер + Инфо) */
+      .ba-main-view {
+        width: 100%;
+        background: var(--glass-bg);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid var(--border-color);
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 10px 30px var(--shadow-color);
+        transition: opacity 0.3s ease; /* Плавное затухание при смене */
+      }
+
       .ba-slider-container {
         position: relative;
         width: 100%;
@@ -534,7 +554,33 @@
         overflow: hidden;
         border: 1px solid var(--border-color);
         --position: 50%;
+        max-height: 600px; /* Ограничение высоты на ПК */
       }
+
+      /* Анимация ручки при первом появлении */
+      .ba-slider-container.animate-wiggle {
+        animation: wiggleSlider 1.5s ease-in-out;
+      }
+      @keyframes wiggleSlider {
+        0% {
+          --position: 50%;
+        }
+        25% {
+          --position: 60%;
+        }
+        75% {
+          --position: 40%;
+        }
+        100% {
+          --position: 50%;
+        }
+      }
+      /* Чтобы CSS-переменная анимировалась плавно, добавляем transition на элементы, зависящие от неё */
+      .ba-slider-container.animate-wiggle .img-before,
+      .ba-slider-container.animate-wiggle .slider-line {
+        transition: all 0.1s linear;
+      }
+
       .ba-slider-img {
         position: absolute;
         top: 0;
@@ -560,36 +606,48 @@
           0 100%
         );
       }
+
+      /* Крупная вертикальная ручка */
       .slider-line {
         position: absolute;
         top: 0;
         bottom: 0;
         left: var(--position);
-        width: 2px;
+        width: 4px;
         background: #fff;
         transform: translateX(-50%);
         z-index: 5;
         pointer-events: none;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
       }
       .slider-button {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 40px;
-        height: 40px;
+        width: 48px;
+        height: 48px;
         border-radius: 50%;
         background: var(--accent-main);
         display: flex;
         justify-content: center;
         align-items: center;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+        border: 2px solid #fff;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+      .ba-slider-container:hover .slider-button {
+        transform: translate(-50%, -50%) scale(1.1);
+        box-shadow: 0 6px 20px rgba(232, 58, 69, 0.8);
       }
       .slider-button svg {
-        width: 20px;
-        height: 20px;
+        width: 24px;
+        height: 24px;
         fill: #fff;
       }
+
       .ba-range {
         position: absolute;
         top: 0;
@@ -605,9 +663,9 @@
       .ba-label {
         position: absolute;
         top: 15px;
-        padding: 5px 15px;
+        padding: 8px 20px;
         border-radius: 4px;
-        font-size: 11px;
+        font-size: 12px;
         font-weight: 800;
         letter-spacing: 1px;
         color: #fff;
@@ -617,12 +675,91 @@
       .label-before {
         left: 15px;
         z-index: 3;
-        border-left: 2px solid var(--accent-main);
+        border-left: 3px solid var(--accent-main);
       }
       .label-after {
         right: 15px;
         z-index: 1;
-        border-right: 2px solid var(--text-muted);
+        border-right: 3px solid var(--text-muted);
+      }
+
+      /* Навигация (Стрелки сверху, текст снизу) */
+      .ba-controls {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin-top: 20px;
+        padding: 0 10px;
+      }
+      .ba-nav-btn {
+        background: transparent;
+        border: none;
+        color: var(--text-main);
+        font-family: "Montserrat";
+        font-weight: 600;
+        font-size: 11px;
+        cursor: pointer;
+        transition: color 0.3s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .ba-nav-btn .nav-arrow {
+        font-size: 26px;
+        font-weight: 300;
+        line-height: 1;
+      }
+      .ba-nav-btn:hover {
+        color: var(--accent-main);
+      }
+      .ba-nav-btn:disabled {
+        color: var(--border-color);
+        cursor: not-allowed;
+      }
+
+      .ba-counter {
+        color: var(--text-muted);
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      /* Лента миниатюр */
+      .ba-thumbs-wrapper {
+        width: 100%;
+        margin-top: 30px;
+        overflow: hidden;
+      }
+      .ba-thumbs-swiper {
+        padding: 10px 0;
+      }
+      .ba-thumb {
+        width: 80px !important;
+        height: 80px;
+        border-radius: 8px;
+        overflow: hidden;
+        cursor: pointer;
+        opacity: 0.5;
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+        box-sizing: border-box;
+      }
+      .ba-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .ba-thumb:hover {
+        opacity: 0.8;
+      }
+      .ba-thumb.active {
+        opacity: 1;
+        border-color: var(--accent-main);
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(232, 58, 69, 0.3);
       }
 
       /* ================= УСЛУГИ ================= */
@@ -936,54 +1073,54 @@
       }
 
       @media (max-width: 900px) {
-        /* ИСПРАВЛЕНИЕ: Меньше отступ сверху, чтобы всё влезло на 1 экран */
         .hero {
           grid-template-columns: 1fr;
           text-align: center;
-          padding-top: 100px;
-          padding-bottom: 20px;
+          /* КАК ПОДНЯТЬ ВЕСЬ БЛОК: Уменьшай 85px, чтобы поднять фото и текст выше к шапке */
+          padding-top: 80px;
+          padding-bottom: 40px;
+          /* КАК ПОДНЯТЬ КРАСНЫЙ ТЕКСТ К ФОТО: Уменьшай 15px */
+          gap: 0px;
         }
 
-        /* ИСПРАВЛЕНИЕ: Уменьшили размер заголовка и добавили "воздух" между строками */
-        .hero-text h2 {
-          line-height: 1.4;
-          margin-bottom: 25px;
-        }
-        .hero-text h1 {
-          font-size: 1.9rem;
-          word-wrap: break-word;
-          overflow-wrap: break-word;
-          hyphens: auto;
-          margin-bottom: 20px;
-        }
-        .hero-text p {
-          margin: 0 auto 30px;
-          padding: 0 10px;
-          font-size: 0.95rem;
-          line-height: 1.5;
-        }
-
-        .hero-buttons {
-          justify-content: center;
-          flex-direction: column;
-          width: 100%;
-          max-width: 300px;
-          margin: 0 auto;
-        }
-        .btn-primary,
-        .btn-outline {
-          width: 100%;
+        /* 2. ДОБАВЛЯЕМ ЭТОТ БЛОК, ЧТОБЫ ПОДНЯТЬ ТЕКСТ ЕЩЕ ВЫШЕ */
+        .hero-text {
+          margin-top: -38px; /* Меняй эту цифру! -20px поднимет еще выше, -5px опустит */
         }
 
         .hero-img {
-          padding: 0 15px;
+          padding: 0;
+          display: flex;
+          justify-content: center;
         }
-        .hero-img img {
-          max-width: 100%;
-          height: auto;
+        .hero-avatar {
+          max-width: 220px;
+          aspect-ratio: 1/1;
+          border-radius: 50%;
+          border: 3px solid var(--accent-main);
+          padding: 4px;
         }
         .hero-img::before {
           display: none;
+        }
+
+        /* КАК ПОДНЯТЬ БЕЛЫЙ ЗАГОЛОВОК К КРАСНОМУ ТЕКСТУ: Уменьшай 15px */
+        .hero-text h2 {
+          line-height: 1.3;
+          margin-bottom: 15px;
+        }
+
+        .hero-text h1 {
+          font-size: 1.6rem; /* Стандартный размер для мобилок */
+          word-break: normal;
+          hyphens: none;
+          margin-bottom: 15px;
+        }
+        .hero-text p {
+          margin: 0 auto;
+          padding: 0 10px;
+          font-size: 0.95rem;
+          line-height: 1.5;
         }
 
         section {
@@ -994,15 +1131,23 @@
         .section-title {
           font-size: 2rem;
         }
-        .ba-grid {
-          grid-template-columns: 1fr;
-        }
 
         .portfolio-swiper .swiper-slide {
           width: 280px;
           max-width: 85vw;
           height: 400px;
         }
+
+        /* Адаптив для новой галереи До/После */
+        .ba-gallery-wrapper {
+          max-width: 100%;
+        }
+        .ba-main-view {
+          padding: 15px;
+        }
+        /*.ba-nav-btn span {
+          display: none; 
+        } */ /* Скрываем текст кнопок на мобилке, оставляем стрелки */
 
         .filters {
           justify-content: center;
@@ -1047,6 +1192,16 @@
         .float-btn svg {
           width: 24px;
           height: 24px;
+        }
+      }
+
+      /* СПЕЦИАЛЬНО ДЛЯ УЛЬТРА-УЗКИХ ЭКРАНОВ (iPhone SE, 320px) */
+      @media (max-width: 350px) {
+        .hero-text h1 {
+          font-size: 1.16rem; /* Уменьшаем шрифт, чтобы длинное слово влезло */
+        }
+        .hero-avatar {
+          max-width: 180px; /* Чуть уменьшаем фото, чтобы сэкономить место */
         }
       }
     </style>
@@ -1123,7 +1278,7 @@
             />
           </g>
         </svg>
-        <div class="logo-text">KLUKVA<span>DESIGN</span></div>
+        <div class="logo-text">KLUKVA<span>ART</span></div>
       </a>
 
       <div class="header-controls">
@@ -1151,29 +1306,22 @@
 
     <!-- ГЛАВНЫЙ ЭКРАН -->
     <section class="hero" id="about">
-      <div class="hero-text" data-aos="fade-right">
-        <h2>Татьяна <br />Контент-креатор</h2>
-        <h1>Продающий <br /><span>визуал</span> для маркетплейсов</h1>
-        <p>
-          Выполняю комплекс работ по созданию контента для карточек товаров.
-          AI-дизайнер, любая постобработка и ретушь, инфографика, видео из фото,
-          монтаж видео (Adobe Illustrator, Premiere, Photoshop). Публикация на
-          WB. Модельная и предметная фотосъемка.
-        </p>
-        <div class="hero-buttons">
-          <a onclick="navigateToCategory('cards')" class="btn btn-primary"
-            >Смотреть работы</a
-          >
-          <a
-            href="https://t.me/ТВОЙ_НИК"
-            target="_blank"
-            class="btn btn-outline"
-            >Обсудить проект</a
-          >
-        </div>
+      <div class="hero-img" data-aos="fade-down">
+        <img
+          src="img/avaCert/avatar.webp"
+          class="hero-avatar"
+          alt="Татьяна Куликова Контент-креатор"
+        />
       </div>
-      <div class="hero-img" data-aos="fade-left">
-        <img src="img/avaCert/avatar.webp" alt="Татьяна Фотограф" />
+
+      <div class="hero-text" data-aos="fade-up" data-aos-delay="100">
+        <h2>Татьяна Куликова <br />Контент-креатор</h2>
+        <!-- Убрали тег <wbr>, слово целое -->
+        <h1>
+          Профессиональное создание <br /><span>визуального контента</span> для
+          маркетплейсов
+        </h1>
+        <p>Повышаю кликабельность и продажи с помощью дизайна.</p>
       </div>
     </section>
 
@@ -1372,30 +1520,41 @@
       </div>
     </section>
 
-    <!-- ДО / ПОСЛЕ -->
+    <!-- НОВАЯ ИНТЕРАКТИВНАЯ ГАЛЕРЕЯ ДО/ПОСЛЕ -->
     <section id="before-after">
       <div class="container">
+        <!-- Возвращаем старый заголовок -->
         <h2 class="section-title" data-aos="fade-up">
           Результат <br /><span>До / После</span>
         </h2>
-        <div class="ba-grid">
-          <div class="ba-item" data-aos="fade-up" data-aos-delay="100">
-            <h3 style="margin-bottom: 20px; font-size: 1.2rem">
-              Цветокоррекция и ИИ-фон
-            </h3>
-            <div class="ba-slider-container">
+
+        <div class="ba-gallery-wrapper" data-aos="fade-up" data-aos-delay="100">
+          <!-- Главный экран просмотра -->
+          <div class="ba-main-view" id="baMainViewer">
+            <!-- Сюда скрипт будет подставлять название (например, "ИИ gen + ретушь") -->
+            <h3
+              id="baMainTitle"
+              style="
+                color: var(--text-main);
+                font-size: 1.3rem;
+                margin-bottom: 20px;
+                text-align: center;
+              "
+            ></h3>
+
+            <div class="ba-slider-container" id="baSliderContainer">
               <div class="ba-slider-img img-after">
                 <img
+                  id="baMainAfter"
                   src="img/before-after/after1.webp"
-                  loading="lazy"
                   alt="После"
                 />
                 <div class="ba-label label-after">ПОСЛЕ</div>
               </div>
               <div class="ba-slider-img img-before">
                 <img
+                  id="baMainBefore"
                   src="img/before-after/before1.webp"
-                  loading="lazy"
                   alt="До"
                 />
                 <div class="ba-label label-before">ДО</div>
@@ -1406,6 +1565,7 @@
                 max="100"
                 value="50"
                 class="ba-range"
+                id="baRangeInput"
                 oninput="
                   this.parentNode.style.setProperty(
                     '--position',
@@ -1425,48 +1585,135 @@
             </div>
           </div>
 
-          <div class="ba-item" data-aos="fade-up" data-aos-delay="200">
-            <h3 style="margin-bottom: 20px; font-size: 1.2rem">
-              Ретушь и Инфографика
-            </h3>
-            <div class="ba-slider-container">
-              <div class="ba-slider-img img-after">
-                <img
-                  src="img/before-after/after2.webp"
-                  loading="lazy"
-                  alt="После"
-                />
-                <div class="ba-label label-after">ПОСЛЕ</div>
-              </div>
-              <div class="ba-slider-img img-before">
-                <img
-                  src="img/before-after/before2.webp"
-                  loading="lazy"
-                  alt="До"
-                />
-                <div class="ba-label label-before">ДО</div>
-              </div>
-              <input
-                type="range"
-                min="0"
-                max="100"
-                value="50"
-                class="ba-range"
-                oninput="
-                  this.parentNode.style.setProperty(
-                    '--position',
-                    this.value + '%',
-                  )
-                "
-              />
-              <div class="slider-line">
-                <div class="slider-button">
-                  <svg viewBox="0 0 24 24">
-                    <path
-                      d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"
-                    />
-                  </svg>
+          <!-- Навигация (Стрелки сверху, текст снизу) -->
+          <div class="ba-controls">
+            <button class="ba-nav-btn" id="baBtnPrev">
+              <span class="nav-arrow">←</span>
+              Предыдущий
+            </button>
+            <div class="ba-counter" id="baCounter">1 из 8</div>
+            <button class="ba-nav-btn" id="baBtnNext">
+              <span class="nav-arrow">→</span>
+              Следующий
+            </button>
+          </div>
+
+          <!-- Лента миниатюр -->
+          <div class="ba-thumbs-wrapper">
+            <div class="ba-thumbs-swiper swiper">
+              <div class="swiper-wrapper" id="baThumbsContainer">
+                <!-- Кейс 1 -->
+                <div
+                  class="swiper-slide ba-thumb active"
+                  data-before="img/before-after/before1.webp"
+                  data-after="img/before-after/after1.webp"
+                  data-title="ИИ gen + ретушь"
+                >
+                  <img
+                    src="img/before-after/after1.webp"
+                    loading="lazy"
+                    alt="Миниатюра 1"
+                  />
                 </div>
+
+                <!-- Кейс 2 -->
+                <div
+                  class="swiper-slide ba-thumb"
+                  data-before="img/before-after/before2.webp"
+                  data-after="img/before-after/after2.webp"
+                  data-title="Цветокоррекция"
+                >
+                  <img
+                    src="img/before-after/after2.webp"
+                    loading="lazy"
+                    alt="Миниатюра 2"
+                  />
+                </div>
+
+                <!-- Кейс 3 -->
+                <div
+                  class="swiper-slide ba-thumb"
+                  data-before="img/before-after/before3.webp"
+                  data-after="img/before-after/after3.webp"
+                  data-title="Замена фона"
+                >
+                  <img
+                    src="img/before-after/after3.webp"
+                    loading="lazy"
+                    alt="Миниатюра 3"
+                  />
+                </div>
+
+                <!-- Кейс 4 -->
+                <div
+                  class="swiper-slide ba-thumb"
+                  data-before="img/before-after/before4.webp"
+                  data-after="img/before-after/after4.webp"
+                  data-title="Замена фона"
+                >
+                  <img
+                    src="img/before-after/after4.webp"
+                    loading="lazy"
+                    alt="Миниатюра 4"
+                  />
+                </div>
+
+                <!-- Кейс 5 -->
+                <div
+                  class="swiper-slide ba-thumb"
+                  data-before="img/before-after/before5.webp"
+                  data-after="img/before-after/after5.webp"
+                  data-title="Замена фона"
+                >
+                  <img
+                    src="img/before-after/after5.webp"
+                    loading="lazy"
+                    alt="Миниатюра 5"
+                  />
+                </div>
+
+                <!-- Кейс 6 -->
+                <div
+                  class="swiper-slide ba-thumb"
+                  data-before="img/before-after/before6.webp"
+                  data-after="img/before-after/after6.webp"
+                  data-title="Замена фона"
+                >
+                  <img
+                    src="img/before-after/after6.webp"
+                    loading="lazy"
+                    alt="Миниатюра 6"
+                  />
+                </div>
+
+                <!-- Кейс 7 -->
+                <div
+                  class="swiper-slide ba-thumb"
+                  data-before="img/before-after/before7.webp"
+                  data-after="img/before-after/after7.webp"
+                  data-title="Замена фона"
+                >
+                  <img
+                    src="img/before-after/after7.webp"
+                    loading="lazy"
+                    alt="Миниатюра 7"
+                  />
+                </div>
+
+                <!-- Кейс 8 -->
+                <div
+                  class="swiper-slide ba-thumb"
+                  data-before="img/before-after/before8.webp"
+                  data-after="img/before-after/after8.webp"
+                  data-title="Замена фона"
+                >
+                  <img
+                    src="img/before-after/after8.webp"
+                    loading="lazy"
+                    alt="Миниатюра 8"
+                  />
+                </div>
+                <!-- Добавляй остальные миниатюры сюда по аналогии. Атрибут data-desc больше не нужен! -->
               </div>
             </div>
           </div>
@@ -1655,7 +1902,7 @@
                 />
               </g>
             </svg>
-            <div class="logo-text">KLUKVA<span>DESIGN</span></div>
+            <div class="logo-text">KLUKVA<span>ART</span></div>
           </a>
           <p>
             Профессиональное создание визуального контента для маркетплейсов.
@@ -1710,7 +1957,7 @@
       </div>
 
       <div class="footer-bottom">
-        <span>© 2026 KlukvaDesign. Все права защищены.</span>
+        <span>© 2026 KlukvaArt. Все права защищены.</span>
         <a href="#" class="logo-wrapper footer-mini-logo">
           <svg
             class="cranberry-icon"
@@ -1740,7 +1987,7 @@
               />
             </g>
           </svg>
-          <div class="logo-text">KLUKVA<span>DESIGN</span></div>
+          <div class="logo-text">KLUKVA<span>ART</span></div>
         </a>
       </div>
     </footer>
@@ -1795,6 +2042,112 @@
           portfolioSwipers.push(swiperInstance);
         });
 
+      // ================= ЛОГИКА НОВОЙ ГАЛЕРЕИ ДО/ПОСЛЕ =================
+      const baThumbs = document.querySelectorAll(".ba-thumb");
+      const baMainBefore = document.getElementById("baMainBefore");
+      const baMainAfter = document.getElementById("baMainAfter");
+      const baMainInfo = document.getElementById("baMainInfo");
+      const baMainViewer = document.getElementById("baMainViewer");
+      const baRangeInput = document.getElementById("baRangeInput");
+      const baSliderContainer = document.getElementById("baSliderContainer");
+
+      const btnPrev = document.getElementById("baBtnPrev");
+      const btnNext = document.getElementById("baBtnNext");
+      const baCounter = document.getElementById("baCounter");
+
+      let currentBaIndex = 0;
+
+      // Инициализация миниатюр (Swiper)
+      var baThumbsSwiper = new Swiper(".ba-thumbs-swiper", {
+        slidesPerView: "auto",
+        spaceBetween: 10,
+        freeMode: true,
+        watchSlidesProgress: true,
+      });
+
+      // Анимация ручки при скролле (Wow-эффект)
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              baSliderContainer.classList.add("animate-wiggle");
+              setTimeout(() => {
+                baSliderContainer.classList.remove("animate-wiggle");
+              }, 1500);
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.5 },
+      );
+      observer.observe(baSliderContainer);
+
+      // Функция обновления главного экрана
+      function updateBaMainView(index) {
+        const targetThumb = baThumbs[index];
+        if (!targetThumb) return;
+
+        // Плавное затухание
+        baMainViewer.style.opacity = 0;
+
+        setTimeout(() => {
+          // Меняем картинки
+          baMainBefore.src = targetThumb.getAttribute("data-before");
+          baMainAfter.src = targetThumb.getAttribute("data-after");
+
+          // Меняем ТОЛЬКО заголовок (описание удалено)
+          document.getElementById("baMainTitle").innerText =
+            targetThumb.getAttribute("data-title");
+
+          // Сбрасываем ползунок на 50%
+          baRangeInput.value = 50;
+          baRangeInput.parentNode.style.setProperty("--position", "50%");
+
+          // Обновляем активный класс у миниатюр
+          baThumbs.forEach((t) => t.classList.remove("active"));
+          targetThumb.classList.add("active");
+
+          // Прокручиваем ленту миниатюр к активной
+          baThumbsSwiper.slideTo(index);
+
+          // Обновляем счетчик
+          baCounter.innerText = `${index + 1} из ${baThumbs.length}`;
+
+          // Управление кнопками
+          btnPrev.disabled = index === 0;
+          btnNext.disabled = index === baThumbs.length - 1;
+
+          // Плавное появление
+          baMainViewer.style.opacity = 1;
+        }, 300); // Время затухания
+      }
+
+      // Клики по миниатюрам
+      baThumbs.forEach((thumb, index) => {
+        thumb.addEventListener("click", () => {
+          currentBaIndex = index;
+          updateBaMainView(currentBaIndex);
+        });
+      });
+
+      // Клики по кнопкам Назад/Вперед
+      btnPrev.addEventListener("click", () => {
+        if (currentBaIndex > 0) {
+          currentBaIndex--;
+          updateBaMainView(currentBaIndex);
+        }
+      });
+      btnNext.addEventListener("click", () => {
+        if (currentBaIndex < baThumbs.length - 1) {
+          currentBaIndex++;
+          updateBaMainView(currentBaIndex);
+        }
+      });
+
+      // Инициализация при загрузке
+      updateBaMainView(0);
+
+      // ================= ФИЛЬТРЫ ПОРТФОЛИО =================
       const filterBtns = document.querySelectorAll(".filter-btn");
       const tabs = document.querySelectorAll(".portfolio-tab");
       const emptyState = document.getElementById("emptyState");
