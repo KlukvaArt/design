@@ -325,6 +325,21 @@
       }
 
       /* ================= ГЛАВНЫЙ ЭКРАН ================= */
+
+      /* ================= НАСТРОЙКИ КРЕСТИКА FANCYBOX ================= */
+      .f-button[title="Close"] {
+        background-color: rgba(0, 0, 0, 0.5) !important; /* Легкий темный фон */
+        border-radius: 50% !important; /* Делаем его круглым */
+        margin: 10px !important; /* Отодвигаем от самого края */
+        transition: all 0.3s ease !important;
+      }
+      .f-button[title="Close"]:hover {
+        background-color: var(
+          --accent-main
+        ) !important; /* При наведении становится клюквенным! */
+        transform: scale(1.1);
+      }
+
       .hero {
         min-height: 100vh;
         padding: 120px 5% 50px;
@@ -2041,20 +2056,33 @@
     <script>
       AOS.init({ duration: 800, once: true, offset: 50 });
 
-      // Инициализация Fancybox (Полноэкранный просмотр)
+      // Инициализация Fancybox (Идеальный UX/UI)
       Fancybox.bind("[data-fancybox]", {
-        // Настройки для премиум-ощущения
-        Thumbs: false, // Отключаем миниатюры внизу экрана
+        // Отключаем миниатюры внизу, чтобы не перегружать экран
+        Thumbs: false,
+
+        // Настройка верхней панели (Toolbar)
         Toolbar: {
           display: {
-            left: ["infobar"],
-            middle: ["zoomIn", "zoomOut", "toggle1to1"],
-            right: ["slideshow", "close"],
+            left: ["infobar"], // Показывает "1 из 10"
+            middle: ["zoomIn", "zoomOut"], // Кнопки зума
+            right: ["close"], // ВАЖНО: Оставляем только крестик (закрытие)
           },
         },
-        Images: {
-          zoom: true, // Разрешаем зум
-        },
+
+        // Настройка жестов (Свайпы)
+        dragToClose: true, // ВАЖНО: Позволяет закрыть картинку свайпом вниз/вверх
+
+        // ВАЖНО: Отключаем автоскрытие крестика и панели (они будут видны всегда)
+        idle: false,
+
+        // Настройка кликов по картинке и фону
+        click: "toggleZoom", // Тап по картинке = Зум (как в Instagram/WB)
+        clickOutside: "close", // Тап по черному фону вокруг картинки = Закрыть
+
+        // Анимации
+        showClass: "f-fadeFastIn",
+        hideClass: "f-fadeFastOut",
       });
 
       var certsSwiper = new Swiper(".certs-swiper", {
